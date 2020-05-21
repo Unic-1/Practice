@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NavBar</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+    }
+
+    nav {
+      padding: 20px 10%;
+      background-color: #000;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-one {
+      justify-content: space-between;
+    }
+
+    .nav-two .logo {
+      margin-right: auto;
+    }
+
+    .nav-two {
+      justify-content: flex-end;
+    }
+
+    button {
+      padding: 10px;
+      border-radius: 50px;
+      width: 120px;
+      background-color: #39b982;
+      color: white;
+      border: none;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+    }
+
+    ul {
+      list-style: none; 
+    }
+
+    li {
+      display: inline-block;
+      padding: 0px 20px;
+    }
+
+    .nav-three li:nth-child(1) {
+      padding: 0px 20px 0 0;
+    }
+
+    .nav-three .demo {
+      order: 2;
+    }
+
+    .nav-three .menu {
+      order: 1;
+    }
+
+    .nav-three .logo {
+      order: 3;
+      margin-left: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="nav-one">
+    <div>
+      <p>Logo</p>
+    </div>
+    <div>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+    <div>
+      <button>Demo</button>
+    </div>
+  </nav>
+
+<br>
+  <nav class="nav-two">
+    <div class="logo">
+      <p>Logo</p>
+    </div>
+    <div class="menu">
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+      <div>  
+      <button>Demo</button>
+    </div>
+  </nav>
+  <br>
+
+  <nav class="nav-three">
+    <div class="logo">
+      <p>Logo</p>
+    </div>
+    <div class="menu">
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+    <div class="demo">  
+      <button>Demo</button>
+    </div>
+  </nav>
+</body>
+</html>

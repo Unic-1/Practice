@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Cycle</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    hr {
+      margin: 5px 0px;
+      color: gray;
+      background-color: gray;
+      border: none;
+      height: 2px;
+    }
+
+    .container {
+      padding: 10%;
+      height: 100%;
+      background-color: lightgray;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: gray 20px 20px 10px;
+    }
+
+    .d-flex {
+      display: flex;
+    }
+
+    .flex-column {
+      flex-direction: column;
+    }
+
+    .flex-row {
+      flex-direction: row;
+    }
+
+    .title {
+      margin: 5px 0px;
+    }
+
+    .color-teal {
+      color: teal;
+    }
+
+    .color-blue {
+      background-color:rgb(64, 123, 234);
+    }
+
+    .btn {
+      color: white;
+      border-radius: 50px;
+      padding: 10px 20px;
+      width: 200px;
+      border: none;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .color-box {
+      height: 300px;
+      width: 300px;
+      background-color: red;
+      flex: 1;
+      border-radius: 20px;
+    }
+
+    .input-container {
+      padding: 20px;
+      flex: 1;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .field {
+      margin: 0px 10px;
+    }
+
+    h3 {
+      font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      text-decoration-style: none;
+    }
+
+    label {
+      color: #292626;
+      margin-right: 5px;
+    }
+
+    input[type='number'] {
+      padding: 8px;
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex flex-column card">
+      <h1 class="title color-teal">Color Cycle</h1>
+      <hr>
+      <div class="d-flex flex-row">
+        <div class="color-box"></div>
+        <div class="d-flex flex-column input-container">
+          <h3>Input</h3>
+          <div class="color-field">
+            <span class="field red">
+              <label for="r">R:</label>
+              <input type="text" size="2" minlength="2" oninput="changeColor()" maxlength="2" name="r" id="r">
+            </span>
+            <span class="field green">
+              <label for="g">G:</label>
+              <input type="text" size="2" minlength="2" maxlength="2" name="g" id="g" oninput="changeColor()">
+            </span>
+            <span class="field blue">
+              <label for="b">B:</label>
+              <input type="text" size="2" minlength="2" maxlength="2" name="b" id="b" oninput="changeColor()">
+            </span>
+          </div>
+          <div class="interval-field">
+            <label for="interval">Interval:</label>
+            <input type="number" name="interval" id="interval" step="0.01">
+          </div>
+          <button class="btn color-blue" onclick="startOrStop()">Start</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const colorBoxRef = document.querySelector('.color-box')
+    let isRunning = false
+    let intervalId = null
+
+    function startOrStop() {
+      if(!isRunning) {
+        const interval = document.querySelector('#interval').value || 0.25
+        console.log(interval);
+        
+        const step = 1
+        let color = Object.assign({}, rgb)
+        // color.r = parseInt(color.r, 16)
+        // color.g = parseInt(color.g, 16)
+        // color.b = parseInt(color.b, 16)
+        let total = `${color.r}${color.g}${color.b}`
+        console.log(total);
+        
+        let hex = parseInt(total, 16)
+        console.log(hex);
+        
+
+        intervalId = setInterval(() => {
+          // color.r = (color.r + 1) % 256
+          // color.g = (color.g + 1) % 256
+          // color.b = (color.b + 1) % 256
+          hex = (hex + 10) % 16777215
+          hexColor = {}
+          hexColor.r = color.r.toString(16)
+          hexColor.g = color.g.toString(16)
+          hexColor.b = color.b.toString(16)
+
+          console.log(hex);
+          
+          // colorBoxRef.style.backgroundColor = getHex(hexColor)
+          colorBoxRef.style.backgroundColor = `#${hex.toString(16)}`
+        }, interval * 1000)
+        document.querySelector('button').innerText = 'Stop'
+        isRunning = true
+      } else {
+        clearInterval(intervalId)
+        document.querySelector('button').innerText = 'Start'
+        isRunning = false
+      }
+    }
+
+    const rgb = {r: 'ff', g: 'ff', b: 'ff'}
+    function changeColor() {
+      const ele = event.target
+      rgb[ele.name] = ele.value
+
+      colorBoxRef.style.backgroundColor = getHex(rgb)
+
+    }
+
+    function getHex({r, g, b}) {
+      return `#${r}${g}${b}`
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      rgb.r = document.querySelector('#r').value
+      rgb.g = document.querySelector('#g').value
+      rgb.b = document.querySelector('#b').value      
+
+      colorBoxRef.style.backgroundColor = getHex(rgb)
+    })
+  </script>
+</body>
+</html>

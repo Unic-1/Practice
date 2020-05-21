@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Lights</title>
+
+  <style>
+    .glow-red {
+      -webkit-animation: glow-red 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-red 0.5s ease-in-out infinite alternate;
+      animation: glow-red 0.5s ease-in-out infinite alternate;
+    }
+
+    .glow-orange {
+      -webkit-animation: glow-orange 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-orange 0.5s ease-in-out infinite alternate;
+      animation: glow-orange 0.5s ease-in-out infinite alternate;
+    }
+
+    .glow-yellow {
+      -webkit-animation: glow-yellow 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-yellow 0.5s ease-in-out infinite alternate;
+      animation: glow-yellow 0.5s ease-in-out infinite alternate;
+    }
+
+    .glow-green {
+      -webkit-animation: glow-green 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-green 0.5s ease-in-out infinite alternate;
+      animation: glow-green 0.5s ease-in-out infinite alternate;
+    }
+
+    .glow-blue {
+      -webkit-animation: glow-blue 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-blue 0.5s ease-in-out infinite alternate;
+      animation: glow-blue 0.5s ease-in-out infinite alternate;
+    }
+
+    .glow-indigo {
+      -webkit-animation: glow-indigo 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-indigo 0.5s ease-in-out infinite alternate;
+      animation: glow-indigo 0.5s ease-in-out infinite alternate;
+    }
+
+    .glow-violet {
+      -webkit-animation: glow-violet 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow-violet 0.5s ease-in-out infinite alternate;
+      animation: glow-violet 0.5s ease-in-out infinite alternate;
+    }
+
+    @-webkit-keyframes glow-red {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px red, 0 0 40px red, 0 0 50px red, 0 0 60px red, 0 0 70px red;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px tomato, 0 0 40px tomato, 0 0 50px tomato, 0 0 60px tomato, 0 0 70px tomato, 0 0 80px tomato;
+      }
+    }
+
+    @-webkit-keyframes glow-orange {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px orangered, 0 0 40px orangered, 0 0 50px orangered, 0 0 60px orangered, 0 0 70px orangered;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px orange, 0 0 40px orange, 0 0 50px orange, 0 0 60px orange, 0 0 70px orange, 0 0 80px orange;
+      }
+    }
+
+    @-webkit-keyframes glow-yellow {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px gold, 0 0 40px gold, 0 0 50px gold, 0 0 60px gold, 0 0 70px gold;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px yellow, 0 0 40px yellow, 0 0 50px yellow, 0 0 60px yellow, 0 0 70px yellow, 0 0 80px yellow;
+      }
+    }
+
+    @-webkit-keyframes glow-green {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px green, 0 0 40px green, 0 0 50px green, 0 0 60px green, 0 0 70px green;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px lightgreen, 0 0 40px lightgreen, 0 0 50px lightgreen, 0 0 60px lightgreen, 0 0 70px lightgreen, 0 0 80px lightgreen;
+      }
+    }
+
+    @-webkit-keyframes glow-blue {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px blue, 0 0 40px blue, 0 0 50px blue, 0 0 60px blue, 0 0 70px blue;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px lightblue, 0 0 40px lightblue, 0 0 50px lightblue, 0 0 60px lightblue, 0 0 70px lightblue, 0 0 80px lightblue;
+      }
+    }
+
+    @-webkit-keyframes glow-indigo {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px indigo, 0 0 40px indigo, 0 0 50px indigo, 0 0 60px indigo, 0 0 70px indigo;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px lightseagreen, 0 0 40px lightseagreen, 0 0 50px lightseagreen, 0 0 60px lightseagreen, 0 0 70px lightseagreen, 0 0 80px lightseagreen;
+      }
+    }
+
+    @-webkit-keyframes glow-purple {
+      from {
+        box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px purple, 0 0 40px purple, 0 0 50px purple, 0 0 60px purple, 0 0 70px purple;
+      }
+      
+      to {
+        box-shadow: 0 0 20px #fff, 0 0 30px violet, 0 0 40px violet, 0 0 50px violet, 0 0 60px violet, 0 0 70px violet, 0 0 80px violet;
+      }
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .circle {
+      height: 30px;
+      width: 30px;
+      border-radius: 50px;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .orange {
+      background-color: orange;
+    }
+
+    .yellow {
+      background-color: gold;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+
+    .indigo {
+      background-color: indigo;
+    }
+  
+    .violet {
+      background-color: purple;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div name="red" class="circle red glow"></div>
+    <div name="orange" class="circle orange"></div>
+    <div name="yellow" class="circle yellow"></div>
+    <div name="green" class="circle green"></div>
+    <div name="blue" class="circle blue"></div>
+    <div name="indigo" class="circle indigo"></div>
+    <div name="violet" class="circle violet"></div>
+  </div>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      setInterval(() => {
+        const bulbIndex = parseInt(Math.random() * 7)
+        const activeBulbIndex = document.getElementsByClassName('glow')[0]
+        const selectedBulbRef = document.getElementsByClassName('circle')[bulbIndex]
+        
+        if(activeBulbIndex) {
+          activeBulbIndex.classList.remove('glow')
+          activeBulbIndex.classList.remove('glow'+'-'+activeBulbIndex.getAttribute('name'))
+        }
+
+        selectedBulbRef.classList.add('glow')
+        selectedBulbRef.classList.add('glow'+'-'+selectedBulbRef.getAttribute('name'))
+
+        
+      }, 500);
+      console.log('READY');
+      
+    })
+  </script>
+</body>
+</html>

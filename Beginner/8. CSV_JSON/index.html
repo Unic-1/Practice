@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV JSON converter</title>
+
+  <style>
+    .container {
+      padding: 15px 10%;
+    }
+
+    .full-height {
+      height: 100vh;
+    }
+
+    .d-flex {
+      display: flex;
+      height: inherit;
+    }
+
+    .input,
+    .output {
+      flex: 1 1 auto;
+
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      resize: none;
+    }
+
+    .field {
+      margin: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container full-height">
+    <input type="file" name="input-file" id="input-file">
+    <div class="d-flex">
+      <div class="field input">
+        <textarea name="input" id="input"></textarea></div>
+      <div class="field operations">
+        <button onclick="csvToJson()" class="btn primary">CSV To JSON</button>
+      </div>
+      <div class="field output">
+        <textarea name="output" id="output"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function csvToJson() {
+      const input = document.querySelector('#input').value
+      const parsedInput = input.split('\n')
+      const header = parsedInput[0]
+      const parsedHeader = header.split(',')
+
+      const out = []
+      for (let index = 1; index < parsedInput.length; index++) {
+        const row = parsedInput[index];
+        const parsedRow = row.split(',')
+
+        out.push(
+          parsedHeader.reduce((previous, value, headerIndex) => {
+            previous[value] = parsedRow[headerIndex]
+            return previous
+          }, {})
+        )
+      }
+
+      const output = document.querySelector('#output')
+
+      let formattedOutput = out.map((item) => {
+        let text = '\t{\n'
+        text += Object.entries(item).map(([key, value]) => {
+          return `\t\t${key}: ${value}`
+        }).join('\n')
+        text += '\n\t}'
+        return text
+      }).join(',\n')
+
+
+
+      output.value = '[\n' + formattedOutput + '\n]'
+    }
+
+
+    function handleFileSelect(evt, target) 
+    {
+      var files = evt.target.files;
+      if( files.length > 1 )
+      {
+        alert("Multiple files not supported...");
+      }
+
+      file = files[0];
+
+      var reader = new FileReader();
+      // Closure to capture the file information.
+      reader.onload = (
+        function(theFile) 
+        {
+          return function(e) 
+          {
+            target.value = e.target.result;
+          };
+        }
+      )(file);
+
+      // Read in the image file as a data URL.
+      reader.readAsText(file);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for the various File API support.
+      if (window.File && window.FileReader && window.FileList && window.Blob) 
+      {
+        //alert("This browser supports file loading...");
+        document.querySelector('#input-file').addEventListener('change', function(evt){ return handleFileSelect(evt, document.querySelector('#input')); } );
+      } 
+      else 
+      {
+        alert('The File APIs are not fully supported in this browser.');
+      }
+    })
+
+  </script>
+</body>
+
+</html>

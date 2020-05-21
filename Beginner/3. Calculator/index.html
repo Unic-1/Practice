@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .calculator-body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 350px;
+      background-color: lightgray;
+      border-radius: 10px;
+      padding: 7px;
+      height: 250px;
+    }
+
+    .display-wrapper {
+      width: 100%;  
+    }
+
+    #display {
+      width: 100%;
+      height: 30px;
+      background-color: white;
+    }
+
+    .button-container {
+      display: flex;
+      flex-grow: 5;
+      justify-content: center;
+    }
+
+    .number-wrapper {
+      flex: 3;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .operator-wrapper {
+      flex: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .operator-wrapper button {
+      height: 60px;
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="calculator-body">
+      <div class="display-wrapper">
+        <!-- <input type="text" name="display" id="display"> -->
+        <p id="display" ></p>
+      </div>
+      <div class="button-container">
+        <div class="number-wrapper">
+          <button value="1" onclick="numInput(event)">1</button>
+          <button value="2" onclick="numInput(event)">2</button>
+          <button value="3" onclick="numInput(event)">3</button>
+          <button value="4" onclick="numInput(event)">4</button>
+          <button value="5" onclick="numInput(event)">5</button>
+          <button value="6" onclick="numInput(event)">6</button>
+          <button value="7" onclick="numInput(event)">7</button>
+          <button value="8" onclick="numInput(event)">8</button>
+          <button value="9" onclick="numInput(event)">9</button>
+          <button value="0" onclick="numInput(event)" style="flex: 1">0</button>
+        </div>
+        <div class="operator-wrapper">
+          <button value="+" onclick="opInput(event)">+</button>
+          <button value="-" onclick="opInput(event)">-</button>
+          <button value="*" onclick="opInput(event)">x</button>
+          <button value="/" onclick="opInput(event)">/</button>
+          <button value="%" onclick="opInput(event)">%</button>
+          <button value="=" onclick="opInput(event)">=</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let num1, num2, op
+
+    const opEvaluationMap = {
+      '+' : (a, b) => {
+        return a + b
+      },
+      '-' : (a, b) => {
+        return a - b
+      },
+      '*' : (a, b) => {
+        return a * b
+      },
+      '/' : (a, b) => {
+        return a / b
+      },
+      '%' : (a, b) => {
+        return a % b
+      }
+    }
+
+    function numInput(event) {
+      const val = event.target.value
+      if(op) {
+        num2 = `${num2 ? num2 : ''}${val}`
+      } else {
+        num1 = `${num1 ? num1 : ''}${val}`
+      }
+
+      displayExpression()
+    }
+
+    function opInput(event) {
+      const val = event.target.value
+
+      if(op) {
+        num1 = opEvaluationMap[op](+num1, +num2)
+        num2 = null
+        op = null
+      }
+
+      if(val !== '=')
+        op = val
+
+      displayExpression()
+    }
+
+    function displayExpression() {
+      const expression = `${num1 ? num1 : ''} ${op ? op : ''} ${num2 ? num2 : ''}`
+
+      document.getElementById('display').innerHTML = expression
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background-color: lightgray;
+      font-family: sans-serif;
+    }
+
+    .container {
+      padding: 15px 10%;
+    }
+
+    .d-flex {
+      display: flex;
+    }
+
+    .column {
+      flex-direction: column;
+    }
+
+    .row {
+      flex-direction: row;
+    }
+
+    .align-center {
+      align-items: center;
+    }
+
+    .align-stretch {
+      align-items: stretch;
+    }
+
+    .countdown-wrapper {
+      color: gray;
+      font-size: 2rem;
+    }
+
+    .countdown-wrapper h1 {
+      font-weight: 300;
+    }
+
+    .justify-content-space-between {
+      justify-content: space-between;
+    }
+
+    .justify-content-center {
+      justify-content: center;
+    }
+
+    .separator {
+      padding: 0px 10px;
+      font-weight: 900;
+    }
+
+    .field {
+      margin: 5px 0px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: gray 10px 20px 10px;
+      padding: 20px;
+      height: 450px;
+    }
+
+    .btn {
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: none;
+      padding: 10px 10px;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .primary {
+      background-color: rgb(36, 107, 238);
+    }
+
+    input[type=date], input[type=time] {
+      width: 100%;
+      padding: 10px;
+      font-family: sans-serif;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex column align-center justify-content-space-between card">
+      <h1 class="event-title">Event</h1>
+      <form class="d-flex column align-stretch">
+        <div class="field">
+          <label for="event-name">Event:</label>
+          <br>
+          <input type="text" name="event-name" id="event-name">
+        </div>
+        <div class="field">
+          <label for="event-name">Date:</label>
+          <br>
+          <input type="date" required name="event-date" value="01/01/2020" id="event-date">
+        </div>
+        <div class="field">
+          <label for="event-name">Time:</label>
+          <br>
+          <input type="time" name="event-time" id="event-time">
+        </div>
+        <button class="field btn primary" onclick="startCountdown(event)">Start</button>
+      </form>
+
+      <div class="countdown-wrapper d-flex row align-center">
+        <h1 class="countdown-text"></h1> 
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    let countDownRef = null
+
+    function startCountdown(e) {
+      e.preventDefault()
+
+      let eventName = document.querySelector('#event-name').value
+      let dateInput = document.querySelector('#event-date').value
+      let timeInput = document.querySelector('#event-time').value
+
+      if(!dateInput) {
+        console.log('Date is required');
+      }
+
+      if(!timeInput) {
+        timeInput = '00:00'
+      }
+
+      const timeFrame = ['sec', 'min', 'hr', 'day(s)']
+
+      const eventDatetime = new Date(`${dateInput} ${timeInput}`)
+      const currentDatetime = new Date() 
+
+      let diffTime = parseInt((eventDatetime - currentDatetime) / 1000);
+
+      console.log(diffTime);
+      
+      if(diffTime < 0) {
+        alert('Please select a valid time.')
+      } else {
+        countDownRef = setInterval(() => {
+          const compute = []
+          diffTime -= 1
+
+          if(diffTime >= 0) {
+            let diffTimeCopy = diffTime
+            while(diffTimeCopy !== 0) {
+              let x = diffTimeCopy % 60
+              compute.push(x)
+              diffTimeCopy = parseInt(diffTimeCopy/60)
+            }
+
+            const time = compute.map((time, index) => `${time}${timeFrame[index]}`).reverse().join(' ')
+
+            document.querySelector('.countdown-text').innerText = time
+          } else {
+            clearInterval(countDownRef)
+            alert(eventName)
+          }
+        }, 1000)
+      }
+      
+      
+      
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const d = new Date();
+        d.setDate(d.getDate() + 1);
+
+        // console.log(d.toLocaleDateString('en-US'));
+        
+
+        let dateInput = document.querySelector('#event-date')
+        const date = `${d.getFullYear()}-${("0" + (d.getMonth() + 1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}`;
+        // const date = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`;
+        console.log(date);
+        
+        dateInput.value = date
+      })
+  </script>
+</body>
+</html>

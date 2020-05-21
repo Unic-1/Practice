@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Border Radius</title>
+  <style>
+    body {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card {
+      height: 200px;
+      width: 300px;
+      border: solid green; 
+    }
+
+    .code {
+      width: 100%;
+      padding: 20px;
+      background-color: #484848;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="card"></div>
+
+  <input type="number" id="top-left" onchange="changeRadius(event, 'top-left')">
+  <input type="number" id="top-right" onchange="changeRadius(event, 'top-right')">
+  <input type="number" id="bottom-right" onchange="changeRadius(event, 'bottom-right')">
+  <input type="number" id="bottom-left" onchange="changeRadius(event, 'bottom-left')">
+
+  <button>Change</button>
+  <button onclick="copyToClipboard()">Copy</button>
+
+  <p id="single-attr">
+
+  </p>
+  <input type="text" class="code" id="multi-attr" onclick="copyToClipboard(event)">
+
+
+  <script>
+    let inlineStyle = {
+      'top-left': 0,
+      'top-right': 0,
+      'bottom-left': 0,
+      'bottom-right': 0
+    }
+    function changeRadius(event, position) {
+      // if(inlineStyle)
+      console.log(event.target.value, position);
+      const cardRef = document.getElementsByClassName('card')[0]
+      const radius = event.target.value
+      inlineStyle[position] = radius
+      
+      
+      const style = Object.keys(inlineStyle).map(attr => {
+        return `border-${attr}-radius: ${inlineStyle[attr]}px`
+      }).join(';')
+      console.log(style);
+      const paraRef = document.getElementById('multi-attr')
+      paraRef.value = style
+      cardRef.setAttribute('style', style)
+
+      
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Ready');
+      const changeButtonRef = document.getElementsByTagName('button')[0]
+      changeButtonRef.addEventListener('click', () => {
+        const cardRef = document.getElementsByClassName('card')[0]
+
+        // Get element references
+        const topLeftRadiusRef = document.getElementById('top-left') 
+        const topRightRadiusRef = document.getElementById('top-right') 
+        const bottomRightRadiusRef = document.getElementById('bottom-right') 
+        const bottomLeftRadiusRef = document.getElementById('bottom-left') 
+
+        // Get radius value
+        const topLeftRadius = topLeftRadiusRef.value
+        const topRightRadius = topRightRadiusRef.value
+        const bottomRightRadius = bottomRightRadiusRef.value
+        const bottomLeftRadius = bottomLeftRadiusRef.value
+
+        // Form an inline style
+        inlineStyle = `border-radius: ${topLeftRadius ? topLeftRadius : 0}px ${topRightRadius ? topRightRadius : 0}px ${bottomRightRadius ? bottomRightRadius : 0}px ${bottomLeftRadius ? bottomLeftRadius : 0}px`
+        
+        // Set the style
+        cardRef.setAttribute('style', inlineStyle)
+      })
+    })
+
+    function copyToClipboard(event) {
+      /* Get the text field */
+      var copyText = event.target;
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+
+      /* Alert the copied text */
+      alert("Copied the text: " + copyText.value);
+    }
+  </script>
+</body>
+</html>

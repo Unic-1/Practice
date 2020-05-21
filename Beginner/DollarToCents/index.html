@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dollar to cents</title>
+</head>
+<body>
+  <input type="number" name="dollar" id="dollar" step="0.01">
+  <button onclick="convert()">Convert</button>
+
+  <p id="change"></p>
+
+
+  <script>
+    const coins = [{value: 25, unit: 'quarter'}, {value: 10, unit: 'dime'}, {value: 5, unit: 'nickel'}, {value: 1, unit: 'pennie'}]
+    function convert() {
+      const dollar = document.getElementById('dollar').value * 100
+
+      const change = []
+      let remaining = dollar
+      console.log(remaining);
+      
+      coins.forEach(coin => {
+        const changeCoin = parseInt(remaining / coin.value)
+        change.push(`${changeCoin} ${coin.unit}${changeCoin > 1 ? 's': ''}`)
+        remaining %= coin.value
+      })
+
+      // console.log(change.join());
+      document.getElementById('change').innerText = change.join()
+      
+      
+      
+    }
+  </script>
+</body>
+</html>

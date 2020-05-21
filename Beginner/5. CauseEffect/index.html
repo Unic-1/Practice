@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cause Effect</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      padding: 10% 20%;
+      background-color: lightgray;
+      font-family: sans-serif;
+    }
+
+    .container {
+      background-color: white;
+      height: 300px;
+      min-height: 200px;
+      display: flex;
+      border-radius: 15px;
+    }
+
+    .elevation {
+      box-shadow: gray 20px 10px 50px;
+    }
+
+    .list {
+      flex: 1 1 auto;
+      max-width: 370px;
+    }
+
+    ul {
+      list-style: none;
+      overflow-y: auto;
+      max-height: 100%;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    li {
+      padding: 10px 15px;
+      border-bottom: 1px solid lightgray;
+      transition: font-size ease-in .1s;
+    }
+
+    li:hover {
+      content: '';
+      font-size: 1.2rem;
+      color: blue;
+    }
+
+    .active {
+      font-size: 1.2rem;
+      color: blue;
+    }
+
+    .details {
+      flex: 2 1 auto;
+      border-left: 1px solid lightgray;
+      padding: 15px 20px;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .no-selection {
+      margin: auto;
+      display: flex;
+      align-items: center;
+      color: gray;
+    }
+
+    .details .title {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      text-decoration: none;
+      padding: 20px 0px;
+      color: teal;
+    }
+
+    .material-icons {
+      font-size: 48px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container elevation">
+    <div class="list"><ul id="content">
+    </ul></div>
+    <div class="details" id="detail">
+      <span class="no-selection"><span class="material-icons">
+        info
+        </span> 
+        <span>
+          Please select an item
+        </span>
+      
+      </span>
+    </div>
+  </div>
+
+  <script>
+    const users = [
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Sam Smith", street: "5th cross road", city: "", state: "New York", country: "America", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"},
+      {name: "Jhon Boy", street: "5th cross road", city: "Kolkata", state: "West Bengal", country: "India", telephone: "9876543210", birthday: "01/01/1990"}
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const list = document.getElementById('content')
+      users.forEach((user, index) => {
+        const listItem = document.createElement('li')
+        listItem.innerText = user.name
+        listItem.onclick = () => {
+          const activeRef = document.getElementsByClassName('active')
+          if(activeRef.length)
+            activeRef[0].classList.remove('active')
+          listItem.classList.add('active')
+          const details = `
+            <h1 class="title">${user.name}</h1>
+            <address>
+              Street: ${user.street}
+              <br>
+              City: ${user.city}
+              <br>
+              State: ${user.state}
+              <br>
+              Country: ${user.country}
+            </address>
+            <p>Phone: +91 ${user.telephone}
+            </p>
+            <p>DOB: ${user.birthday}</p>
+          `
+          const detailRef = document.getElementById('detail')
+
+          detailRef.innerHTML = details
+        }
+        list.appendChild(listItem)
+      });
+    })
+  </script>
+</body>
+</html>

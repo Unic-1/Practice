@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS variable</title>
+
+  <style>
+    :root {
+      --body-bg-color: lightgray;
+      --white: #fff;
+      --color-primary: rgb(19, 88, 192);
+      --color-error: rgb(238, 66, 66);
+      --color-warning: orange;
+      --container-h-padding: 10;
+      --container-v-padding: 15;
+      --card-padding: 40;
+      --input-background: white;
+      --input-text: black;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: var(--body-bg-color);
+      height: 100vh;
+    }
+
+    .container {
+      padding: calc(var(--container-v-padding) * 1px) calc(var(--container-h-padding) * 1%);
+      height: inherit;
+    }
+
+    .d-flex {
+      display: flex;
+      /* height: inherit; */
+    }
+
+    .column {
+      flex-direction: column;
+    }
+
+    .align-items-center {
+      align-items: center;
+    }
+
+    .justify-content-space-between {
+      justify-content: space-between;
+    }
+
+    .card {
+      background-color: var(--white);
+      max-width: 500px;
+      min-height: 320px;
+      margin: auto;
+      padding: calc(var(--card-padding) * 1px) calc(var(--card-padding) * 2px);
+      border-radius: 10px;
+      box-shadow: 10px 5px 10px gray;
+    }
+
+    .login {
+      flex: 1;
+    }
+
+    .field {
+      margin: 10px 0px;
+    }
+
+    header {
+      margin: 10px 0px;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      background-color: var(--input-background);
+      color: var(--input-text);
+    }
+
+    .btn {
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 5px;
+      width: 150px;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+    }
+
+    .btn-error {
+      background-color: var(--color-error);
+    }
+  </style>
+</head>
+<body>
+  <div class="container d-flex">
+    <section class="d-flex column align-items-center  card">
+      <!-- <div class="card"> -->
+      <header>
+        <h2>Login</h2>
+      </header>
+      <section class="login d-flex column justify-content-space-between">
+        <div class="login-input">
+          <section class="field">
+            <label for="email">Email</label>
+            <br>
+            <input type="email" name="email" id="email">
+            <p class="info"></p>
+          </section>
+          <section class="field">
+            <label for="password">Password</label>
+            <br>
+            <input type="password" name="password" id="password">
+            <p class="info"></p>
+          </section>
+        </div>
+        <login-action>
+          <button class="btn btn-error" onclick="clearInput()">Cancel</button>
+          <button class="btn btn-primary" onclick="login()" >Login</button>
+        </login-action>
+      </section>
+    <!-- </div> -->
+    </section>
+  </div>
+
+  <script>
+    let root = document.documentElement;
+
+    function clearInput() {
+      console.log('CLEAR');
+      
+      const email = document.getElementById('email')
+      const password = document.getElementById('password')
+
+      email.value = ''
+      password.value = ''
+
+      root.style.setProperty('--input-background', 'white')
+      root.style.setProperty('--input-text', 'black')
+    }
+
+    function login() {
+      console.log('login');
+
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+
+      if(email === 'satyam@gmail.com' && password === '12345') {
+        root.style.setProperty('--input-background', 'green')
+        root.style.setProperty('--input-text', 'white')
+      } else {
+        root.style.setProperty('--input-background', 'red')
+        root.style.setProperty('--input-text', 'white')
+      }
+    }
+  </script>
+</body>
+</html>
